@@ -36,8 +36,4 @@ export default {
 </script>
 
 <style scoped>
-@import "~assets/font/iconfont.css";
-.tab-bar {
-  z-index: 10;
-}
 </style>

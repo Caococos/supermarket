@@ -1,6 +1,6 @@
 <template>
-  <div class="goods">
-    <img :src="goodsItem.show.img" alt="">
+  <div class="goods" @click="goToDetail">
+    <img :src="goodsItem.show.img" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
 <!--      将父组件传来的数据中的具体数值展示-->
@@ -20,7 +20,20 @@ export default {
         return {}
       }
     }
-  }
+  },
+  methods: {
+    imageLoad() {
+      this.$bus.$emit('itemImagesLoad')
+    },
+    goToDetail() {
+      this.$router.push('/detail/' + this.goodsItem.iid)
+    }
+  },
+  // computed: {
+  //   getImg() {
+  //     return this.goods.img || this.goods.image || this.goods.show.img
+  //   }
+  // }
 }
 </script>
 

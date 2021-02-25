@@ -14,11 +14,12 @@ name: "NavBar"
 
 <style scoped>
 .nav-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 10;
+  /* 在使用浏览器原生滚动时，为了让导航不跟随一起滚动 */
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*top: 0;*/
+  /*z-index: 10;*/
   display: flex;
   height: 44px;
   line-height: 44px;
