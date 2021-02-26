@@ -98,8 +98,6 @@ export default {
   //  所有的组件都有一个属性$el：用于获取组件中的元素
 
   },
-
-
   updated() {
     //zhihaot1：当back-top组件出现时，调用updated，刷新scrollerHeight
     //当有数据接口时，还是使用mounted里面的方法

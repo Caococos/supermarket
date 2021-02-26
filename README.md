@@ -244,7 +244,23 @@
 
 #### 让Home不要随意销毁掉
 
-* keep-alive
+* keep-alive包裹router-view
 
 #### 让Home中的内容保持原来的状态
 
+* 在deactivated函数中保存离开前的位置
+
+  * ```JavaScript
+    deactivated() {
+      this.saveY = this.$refs.scroll.getScrollY()
+    }
+    ```
+
+* 在activated函数中将保存的位置调用在scroll的scrollTo方法中并刷新scrollHeight
+
+  * ```JavaScript
+    activated() {
+      this.$refs.scroll.scrollTo(0, this.saveY, 0)
+      this.$refs.scroll.refresh()
+    }
+    ```
