@@ -39,9 +39,10 @@ import Scroll from "@/components/common/scroll/Scroll";
 import BackTop from "@/components/content/BackTop";
 
 //常量、方法导入
-import {debounce} from "@/common/utils";
 import {getHomeMultidata, getHomeData, BANNER, RECOMMEND} from "@/network/home";
 import {POP, NEW, SELL} from "@/common/const";
+import {itemListenerMixin} from "@/common/mixins";
+import {debounce} from "@/common/utils";
 
 export default {
   name: "Home",
@@ -68,7 +69,7 @@ export default {
       isShowBackTop: false,
       tabOffControl: 0,
       isTabFixed: false,
-      saveY: 0
+      saveY: 0,
     }
   },
   //函数调用 -> 压入函数栈（保存函数调用过程中所有变量）
@@ -81,22 +82,13 @@ export default {
     this.getHomeProducts(NEW)
     this.getHomeProducts(SELL)
   },
+  mixins: [itemListenerMixin],
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
-    this.$refs.scroll.refresh()
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY()
-  },
-  mounted() {
-     // 监听item中图片加载完成 刷新scrollerHeight
-    const refresh = debounce(this.$refs.scroll.refresh, 300)
-    this.$bus.$on('itemImagesLoad', () => {
-      refresh()
-    })
-
-  //  所有的组件都有一个属性$el：用于获取组件中的元素
-
+    this.$bus.$off('itemImagesLoad', this.itemListener)
   },
   updated() {
     //zhihaot1：当back-top组件出现时，调用updated，刷新scrollerHeight

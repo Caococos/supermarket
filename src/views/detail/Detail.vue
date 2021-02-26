@@ -7,6 +7,8 @@
       <detail-shop-info :shop="shop"/>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"/>
       <detail-param-info :param-info="paramInfo"/>
+      <detail-comment-info :comment-info="commentInfo"/>
+      <goods-list :goods="goodsList"></goods-list>
     </scroll>
   </div>
 
@@ -19,10 +21,15 @@ import DetailBaseInfo from "@/views/detail/childComs/DetailBaseInfo";
 import DetailShopInfo from "@/views/detail/childComs/DetailShopInfo";
 import DetailGoodsInfo from "@/views/detail/childComs/DetailGoodsInfo";
 import DetailParamInfo from "@/views/detail/childComs/DetailParamInfo";
+import DetailCommentInfo from "@/views/detail/childComs/DetailCommentInfo";
+import GoodsList from "@/components/content/goods/GoodsList";
 
 import Scroll from "@/components/common/scroll/Scroll";
 
-import {getDetail, Goods, Shop, GoodsParam} from "@/network/detail";
+import {debounce} from "@/common/utils";
+
+import {getDetail, Goods, Shop, GoodsParam, getRecommend} from "@/network/detail";
+import {itemListenerMixin} from "@/common/mixins";
 
 export default {
   name: "Detail",
@@ -34,6 +41,8 @@ export default {
     DetailGoodsInfo,
     Scroll,
     DetailParamInfo,
+    DetailCommentInfo,
+    GoodsList,
   },
   data() {
     return {
@@ -46,7 +55,7 @@ export default {
       commentInfo: {},
       goodsList: [],
       themeTops: [],
-      currentIndex: 0
+      currentIndex: 0,
     }
   },
   created() {
@@ -56,18 +65,32 @@ export default {
   //  2.根据iid请求详情数据
     getDetail(this.iid).then(res => {
       const data = res.result
-    //  3.获取顶部的图片轮播数据
+    //  1.获取顶部的图片轮播数据
       console.log(res);
       this.topImages = data.itemInfo.topImages
-      //4.获取商品数据
+      //2.获取商品数据
       this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
-    //  5.获取商家数据
+    //  3.获取商家数据
       this.shop = new Shop(data.shopInfo)
-    //  6.保存商品的详情数据
+    //  4.保存商品的详情数据
       this.detailInfo = data.detailInfo
-    //  7.获取参数信息
+    //  5.获取参数信息
       this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+    //  6.获取评论信息
+      if (data.rate.cRate !== 0) {
+        this.commentInfo = data.rate.list[0]
+      }
     })
+
+    // 3.请求推荐数据
+    getRecommend().then(res => {
+      this.goodsList = res.data.list
+    })
+
+  },
+  mixins: [itemListenerMixin],
+  destroyed() {
+    this.$bus.$off('itemImagesLoad', this.itemListener)
   },
   methods: {
     imageLoad() {

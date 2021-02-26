@@ -1,10 +1,10 @@
 <template>
   <div class="goods" @click="goToDetail">
-    <img :src="goodsItem.show.img" @load="imageLoad">
+    <img :src="getImg" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
 <!--      将父组件传来的数据中的具体数值展示-->
-      <span class="price">{{goodsItem.price}}</span>
+      <span class="price">￥{{goodsItem.price}}</span>
       <span class="collect">{{goodsItem.cfav}}</span>
     </div>
   </div>
@@ -24,16 +24,23 @@ export default {
   methods: {
     imageLoad() {
       this.$bus.$emit('itemImagesLoad')
+
+    //  通过发出不同的事件来解决
+    //   if (this.$route.path.indexOf('/home')) {
+    //     this.$bus.$emit('homeItemImagesLoad')
+    //   }else if (this.$route.path.indexOf('/detail')) {
+    //     this.$bus.$emit('detailItemImagesLoad')
+    //   }
     },
     goToDetail() {
       this.$router.push('/detail/' + this.goodsItem.iid)
     }
   },
-  // computed: {
-  //   getImg() {
-  //     return this.goods.img || this.goods.image || this.goods.show.img
-  //   }
-  // }
+  computed: {
+    getImg() {
+      return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
+    }
+  }
 }
 </script>
 

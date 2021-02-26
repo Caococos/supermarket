@@ -264,3 +264,9 @@
       this.$refs.scroll.refresh()
     }
     ```
+
+### 详情页实现
+
+#### 点击商品进入详情页
+
+* 监听goodsListItem组件中的根元素，methods中实现跳转router（路由）
