@@ -13,7 +13,6 @@ export const itemListenerMixin = {
       refresh()
     }
     this.$bus.$on('itemImagesLoad', this.itemListener)
-    console.log('我是mixins');
     //  所有的组件都有一个属性$el：用于获取组件中的元素
   },
 }

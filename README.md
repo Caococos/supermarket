@@ -269,4 +269,71 @@
 
 #### 点击商品进入详情页
 
-* 监听goodsListItem组件中的根元素，methods中实现跳转router（路由）
+* 监听goodsListItem组件中根元素的点击
+* 点击之后获取商品的iid，跳转到详情页，并且传入iid
+
+#### 详情页的导航栏实现
+
+* 使用Navbar组件中的插槽
+  * 返回按钮：left
+  * 标题列表的展示：center
+
+#### 请求详情的数据
+
+* 封装新的请求方法
+
+  * ```JavaScript
+    export function getDetail(iid) {
+      return request({
+        url:'/detail',
+        params: {
+          iid
+        }
+      })
+    }
+    ```
+
+#### 轮播图的实现
+
+* Swiper/SwiperItem组件的使用
+
+#### 商品基本信息的展示
+
+* 封装思想
+  * 数组来自不同的地方
+  * 对数据进行汇总：一个对象
+  * 对象传入到子组件中
+
+#### 店铺信息的展示
+
+#### 商品图片的展示
+
+* 参数信息的展示
+
+
+#### 评论信息的展示
+
+*	时间格式化
+*	服务器返回时间戳 -> date -> 格式化
+*	yyy-MM-dd hh:mm:ss
+
+#### Recommend数据的展示
+
+* 请求recommend数据
+
+* GoodsList展示数据
+
+* 用计算属性包装来自不同的数据
+
+  * ```JavaScript
+    getImg() {
+      return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
+    }
+    ```
+
+#### mixin的使用
+
+* 创建混入对象：const mixin = {}
+* 组件对象中：mixins: [mixin]
+
+#### 
