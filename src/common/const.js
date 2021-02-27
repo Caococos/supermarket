@@ -1,4 +1,4 @@
-export const BACK_TOP_DISTANCE = 1000
+export const BACK_TOP_DISTANCE = 500
 
 export const POP = 'pop';
 export const NEW = 'new';

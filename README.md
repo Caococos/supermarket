@@ -32,7 +32,7 @@
 
 ### 项目的模块划分：tabber->路由映射关系
 
-### Home开发
+## Home开发
 
 * navbar的封装
 * 网络数据的请求
@@ -265,7 +265,7 @@
     }
     ```
 
-### 详情页实现
+## Detail实现
 
 #### 点击商品进入详情页
 
@@ -336,4 +336,39 @@
 * 创建混入对象：const mixin = {}
 * 组件对象中：mixins: [mixin]
 
-#### 
+###标题和内容的联动效果
+
+#### 点击标题，滚动到对应的标题
+
+* 在detail中监听标题的点击，获取index
+* 滚动到对应的标题
+  * 获取所有标题的offsetTop
+  * 问题：在哪里才能获取到正确的offsetTop
+    * 1.在created中不能获取元素
+    * 2.在mounted数据还没有获取到
+    * 3.获取到数据的回调中也不行，DOM还没有渲染完
+    * 4.$nextTick也不行，因为图片的高度没有被计算在内
+    * 5.在图片加载完成后，获取的高度才是正确的
+
+#### 内容滚动，显示正确的标题
+
+* 普通做法：
+
+* ```JavaScript
+  (this.currentIndex !== i) && ((i < length - 1 && positionY >= this.themeTops[i] && positionY < this.themeTops[i+1]) ||
+    (i === length - 1 && positionY >= this.themeTops[i]))
+  ```
+
+* 条件成立：this.currentIndex = i
+
+* 条件一：防止赋值的过程过于频繁
+
+* 条件二：
+
+  * 1.判断区间
+  * 2.判断大于等于
+
+* hack做法：
+
+* 
+

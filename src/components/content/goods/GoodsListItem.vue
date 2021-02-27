@@ -33,7 +33,10 @@ export default {
     //   }
     },
     goToDetail() {
-      this.$router.push('/detail/' + this.goodsItem.iid)
+      // 因为有些图片是没有连接的所以给它加个判断
+      if (this.goodsItem.iid) {
+        this.$router.push('/detail/' + this.goodsItem.iid)
+      }
     }
   },
   computed: {

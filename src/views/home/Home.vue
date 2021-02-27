@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav"><div slot="center">购物小镇</div></nav-bar>
+    <nav-bar class="home-nav"><div slot="center">浩旭的衣柜</div></nav-bar>
     <tab-control :titles="['流行', '新款', '精选']"
                  @tabClick="tabClick"
                  class="tab-control"
@@ -36,12 +36,11 @@ import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/content/tabControl/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 import Scroll from "@/components/common/scroll/Scroll";
-import BackTop from "@/components/content/BackTop";
 
 //常量、方法导入
 import {getHomeMultidata, getHomeData, BANNER, RECOMMEND} from "@/network/home";
-import {POP, NEW, SELL} from "@/common/const";
-import {itemListenerMixin} from "@/common/mixins";
+import {POP, NEW, SELL, BACK_TOP_DISTANCE} from "@/common/const";
+import {backTopMixin, itemListenerMixin} from "@/common/mixins";
 import {debounce} from "@/common/utils";
 
 export default {
@@ -53,8 +52,7 @@ export default {
     NavBar,
     TabControl,
     GoodsList,
-    Scroll,
-    BackTop
+    Scroll
   },
   data() {
     return {
@@ -66,7 +64,6 @@ export default {
         'sell': {page: 1, list: []},
       },
       currentType: POP,
-      isShowBackTop: false,
       tabOffControl: 0,
       isTabFixed: false,
       saveY: 0,
@@ -82,7 +79,7 @@ export default {
     this.getHomeProducts(NEW)
     this.getHomeProducts(SELL)
   },
-  mixins: [itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin],
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
   },
@@ -121,22 +118,17 @@ export default {
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
     },
-    backClick() {
-      //在Scroll组件中包装好后的方法
-      this.$refs.scroll.scrollTo(0, 0)
-    },
     contentScroll(position) {
       //判断backTop是否显示
-      this.isShowBackTop = (-position.y) > 500
-
+      this.isShowBackTop = (-position.y) > BACK_TOP_DISTANCE
     //  决定tabControl是否吸顶（position: fixed）
       this.isTabFixed = (-position.y) > this.tabOffControl
     },
     loadMore() {
       this.getHomeProducts(this.currentType)
     },
-
     swiperImageLoad() {
+      //  所有的组件都有一个属性$el：用于获取组件中的元素
       this.tabOffControl = this.$refs.tabControl2.$el.offsetTop
     },
 

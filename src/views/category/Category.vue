@@ -1,8 +1,7 @@
 <template>
   <div>
-    <scroll class="content">
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probe-type="3">
       <ul>
-        <button @click="btnClick">快点我啊</button>
         <li>分类列表1</li>
         <li>分类列表2</li>
         <li>分类列表3</li>
@@ -305,45 +304,25 @@
         <li>分类列表300</li>
       </ul>
     </scroll>
-
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
   </div>
 </template>
 
 <script>
 import Scroll from "@/components/common/scroll/Scroll";
+import {backTopMixin} from "@/common/mixins";
+import {BACK_TOP_DISTANCE} from "@/common/const";
+
 export default {
   name: "Category",
   components: {
     Scroll
   },
-  data() {
-    return {
-      scroll: null
-    }
-  },
-  //组件创建完后调用
-  // created() {
-  //   this.scroll = new BScroll(content)
-  // }
-  //组件挂载完之后才调用mounted
-  // mounted() {
-  //   this.scroll = new BScroll(document.querySelector('.content'), {
-  //     probeType: 3,
-  //     pullUpLoad: true
-  // //   })
-  //   console.log(this.scroll);
-  //
-  //   this.scroll.on('scroll', (position) => {
-  //     // console.log(position);
-  //   })
-
-  //   this.scroll.on('pullingUp', () => {
-  //     console.log('上拉加载');
-  //   })
-  // },
+  mixins: [backTopMixin],
   methods: {
-    btnClick() {
-      console.log('按钮被点击了');
+    contentScroll(position) {
+      //判断backTop是否显示
+      this.isShowBackTop = (-position.y) > BACK_TOP_DISTANCE
     }
   }
 }

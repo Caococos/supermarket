@@ -25,13 +25,7 @@ export default {
   },
   mounted() {
     const wrapper = this.$refs.wrapper
-    // 初始化DOM没有渲染完，滚动滚不到底部，需要加定时器
-    // setTimeout(() => {
-    //   this.scroll = new BScroll(wrapper, {
-    //     click: true,
-    //     probeType: this.probeType,
-    //     pullUpLoad: this.pullUpLoad
-    //   })
+
     //   this.scroll.on('scroll', position => {
     //     this.$emit('scroll', position)
     //   })
@@ -44,11 +38,13 @@ export default {
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad
     })
+    // 监听滚动事件
     if (this.probeType === 2 || this.probeType === 3) {
       this.scroll.on('scroll', position => {
         this.$emit('scroll', position)
       })
     }
+    // 监听上拉到顶部事件
     if (this.pullUpLoad) {
       this.scroll.on('pullingUp', () => {
         this.$emit('pullingUp')
@@ -63,6 +59,7 @@ export default {
       this.scroll && this.scroll.finishPullUp()
     },
     refresh() {
+      console.log('refresh被调用了');
       this.scroll && this.scroll.refresh()
     },
     getScrollY() {
