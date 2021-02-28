@@ -27,6 +27,7 @@ export default {
   methods: {
     addToCart() {
       this.$emit('addToCart')
+      console.log('点击了购物车');
     }
   }
 }

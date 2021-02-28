@@ -368,7 +368,15 @@
   * 1.判断区间
   * 2.判断大于等于
 
-* hack做法：
+* hack做法：是数组后面加上一个MAX_VALUE
 
+  * ```JavaScript
+    this.currentIndex !== i && (positionY >= this.themeTops[i] && positionY < this.themeTops[i+1])
+    ```
+
+#### 顶部工具栏的封装
+
+#### 详情页的回到顶部
+
+* home组件和detail组件回到顶部：mixin
 * 
-

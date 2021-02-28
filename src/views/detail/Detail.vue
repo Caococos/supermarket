@@ -14,7 +14,7 @@
       <goods-list :goods="goodsList" ref="recommendInfo"/>
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addToCart="addToCart"/>
   </div>
 
 </template>
@@ -144,7 +144,7 @@ export default {
       // 1.获取Y值
       const positionY = -position.y
       //2.positionY与标题中的值进行对比
-      // for (let i in this.themeTops)
+      // for (let i of this.themeTops)
       // 这里的i是个字符串
       let length = this.themeTops.length
       for (let i =0; i < length-1; i++) {
@@ -161,6 +161,19 @@ export default {
       }
       this.isShowBackTop = (positionY) > BACK_TOP_DISTANCE
     },
+    addToCart() {
+    //  1.获取购物车需要展示的信息
+      const product = {}
+      product.image = this.topImages[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.realPrice
+      product.iid = this.iid
+    //  2.将商品添加到购物车
+    //     this.$store.cartList.push(product)
+    //   this.$store.commit('addCart', product)
+      this.$store.dispatch('addCart', product)
+    }
   }
 }
 </script>
