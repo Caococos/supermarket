@@ -20,14 +20,14 @@
 </template>
 
 <script>
-import DetailNavbar from "@/views/detail/childComs/DetailNavbar";
-import DetailSwiper from "@/views/detail/childComs/DetailSwiper";
-import DetailBaseInfo from "@/views/detail/childComs/DetailBaseInfo";
-import DetailShopInfo from "@/views/detail/childComs/DetailShopInfo";
-import DetailGoodsInfo from "@/views/detail/childComs/DetailGoodsInfo";
-import DetailParamInfo from "@/views/detail/childComs/DetailParamInfo";
-import DetailCommentInfo from "@/views/detail/childComs/DetailCommentInfo";
-import DetailBottomBar from "@/views/detail/childComs/DetailBottomBar";
+import DetailNavbar from "@/views/detail/childComps/DetailNavbar";
+import DetailSwiper from "@/views/detail/childComps/DetailSwiper";
+import DetailBaseInfo from "@/views/detail/childComps/DetailBaseInfo";
+import DetailShopInfo from "@/views/detail/childComps/DetailShopInfo";
+import DetailGoodsInfo from "@/views/detail/childComps/DetailGoodsInfo";
+import DetailParamInfo from "@/views/detail/childComps/DetailParamInfo";
+import DetailCommentInfo from "@/views/detail/childComps/DetailCommentInfo";
+import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
 
 import Scroll from "@/components/common/scroll/Scroll";
 import GoodsList from "@/components/content/goods/GoodsList";

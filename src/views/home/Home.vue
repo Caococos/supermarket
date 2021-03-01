@@ -82,6 +82,8 @@ export default {
   mixins: [itemListenerMixin, backTopMixin],
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
+    this.$refs.scroll.refresh()
+    this.$bus.$on('itemImagesLoad', this.itemListener)
   },
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY()

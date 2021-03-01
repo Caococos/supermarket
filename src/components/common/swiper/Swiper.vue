@@ -102,8 +102,8 @@
             this.setTransform(-this.currentIndex * this.totalWidth);
           }
 
-          // 2.结束移动后的回调
-          this.$emit('transitionEnd', this.currentIndex-1);
+          // 2.结束移动后的回调    这个事件调动的很频繁所以我注释掉了
+          // this.$emit('transitionEnd', this.currentIndex-1);
         }, this.animDuration)
       },
 

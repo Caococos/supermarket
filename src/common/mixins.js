@@ -13,7 +13,8 @@ export const itemListenerMixin = {
     this.itemListener = () => {
       refresh()
     }
-    this.$bus.$on('itemImagesLoad', this.itemListener)
+    // 开启监听事件写在activated
+    // this.$bus.$on('itemImagesLoad', this.itemListener)
   },
 }
 
