@@ -59,7 +59,6 @@ export default {
       this.scroll && this.scroll.finishPullUp()
     },
     refresh() {
-      console.log('refresh被调用了');
       this.scroll && this.scroll.refresh()
     },
     getScrollY() {

@@ -15,6 +15,7 @@
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
     <detail-bottom-bar @addToCart="addToCart"/>
+    <toast :message="message" :show="show"/>
   </div>
 
 </template>
@@ -31,8 +32,10 @@ import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
 
 import Scroll from "@/components/common/scroll/Scroll";
 import GoodsList from "@/components/content/goods/GoodsList";
+import Toast from "@/components/common/toast/Toast";
 
 import {debounce} from "@/common/utils";
+import {mapActions} from "vuex"
 
 import {getDetail, Goods, Shop, GoodsParam, getRecommend} from "@/network/detail";
 import {backTopMixin, itemListenerMixin} from "@/common/mixins";
@@ -50,7 +53,8 @@ export default {
     DetailParamInfo,
     DetailCommentInfo,
     GoodsList,
-    DetailBottomBar
+    DetailBottomBar,
+    Toast
   },
   data() {
     return {
@@ -65,6 +69,8 @@ export default {
       themeTops: [0],
       currentIndex: 0,
       getThemeTopY: null,
+      show: false,
+      message: ''
     }
   },
   created() {
@@ -75,7 +81,6 @@ export default {
     getDetail(this.iid).then(res => {
       const data = res.result
     //  1.获取顶部的图片轮播数据
-      console.log(res);
       this.topImages = data.itemInfo.topImages
     //  2.获取商品数据
       this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
@@ -114,7 +119,6 @@ export default {
       }else this.themeTops.push(this.$refs.recommendInfo.$el.offsetTop)
       this.themeTops.push(this.$refs.recommendInfo.$el.offsetTop)
       this.themeTops.push(Number.MAX_VALUE)
-      console.log('标题位置获取完成');
     },100)
 
   },
@@ -123,6 +127,7 @@ export default {
     this.$bus.$off('itemImagesLoad', this.itemListener)
   },
   methods: {
+    ...mapActions(['addCart']),
     imageLoad() {
       this.$refs.scroll.refresh()
       //每次刷新图片都会调用防抖函数，每次的函数都会被刷新。 可以将防抖函数定义到data中
@@ -172,7 +177,20 @@ export default {
     //  2.将商品添加到购物车
     //     this.$store.cartList.push(product)
     //   this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+    //   this.$store.dispatch('addCart', product).then(res => {
+    //     console.log(res);
+    //   })
+    //  将actions中的函数映射到detail
+      this.addCart(product).then(res => {
+        // this.show = true
+        // this.message = res
+        //
+        // setTimeout(() => {
+        //   this.show = false
+        //   this.message = ''
+        // }, 1500)
+        this.$toast.show(res)
+      })
     }
   }
 }

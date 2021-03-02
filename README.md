@@ -379,4 +379,83 @@
 #### 详情页的回到顶部
 
 * home组件和detail组件回到顶部：mixin
+
+### 点击加入购物车
+
+#### 监听加入购物按钮的点击，并获取商品信息
+
+* 监听
+* 获取商品信息：iid/price/image/title/desc
+
+#### 将商品添加到Vuex中
+
+* 安装Vuex
+* 配置Vuex
+* 定义mutations，将商品添加到state.cartList
+* 重构代码：
+  * 将mutations中的代码抽取到actions中（定义两个mutations）
+  * 将mutations/actions单独抽取到文件中
+
+### 购物车的展示
+
+#### 购物车的导航栏
+
+#### 购物车商品的展示
+
+* CartList -> Scroll （滚动问题）
+* CartListItem -> CheckButton
+
+#### 商品的选中和不选中切换
+
+* 修改模型对象，改变选中和不选中
+
+#### 底部工具栏的汇总
+
+* 全选按钮 (样式调整)
+* 计算总价格 (filter过滤和reduce累加)
+* 结算
+
+### 购物车的全选按钮
+
+* 显示的状态
+  * 判断是否有一个不选中，全选就是不选中
+* 点击全选按钮
+  * 如果原来都是选中状态，点击一次，全部不选中
+  * 如果原来都是不选中（某些不选中），全部选中
+
+### 添加购物车弹窗
+
+#### Vuex的补充
+
+* Actions可以返回一个Promise
+* mapActions的映射关系
+
+#### Toast（吐司）封装
+
+* 普通封装方式
+* 插件封装方式
+
+### 补充细节
+
+#### fastClick 减少点击延迟
+
+* 安装fastclick
+* 导入
+* 调用attach
+
+#### 图片的懒加载
+
+* 什么是图片懒加载
+  * 图片需要显示在屏幕上时，再加载这张图片
+* 使用vue-lazyload
+  * 安装
+  * 导入
+  * Vue.use
+  * 修改img
+    * :src -> v-lazy
+
+#### px2vw插件使用
+
+* 安装插件
+* 在postcss.config.js中配置
 * 

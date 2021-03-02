@@ -1,11 +1,11 @@
 <template>
   <div class="bottom-bar">
     <div class="left">
-      <check-button/>
+      <check-button :is-check="isSelectAll" @click.native="checkClick"/>
       <div class="check-text">全选</div>
     </div>
     <div class="center">合计：{{totalPrice}}</div>
-    <div class="right">结算：({{checkLength}})</div>
+    <div class="right" @click="calcClick">结算：({{checkLength}})</div>
   </div>
 </template>
 
@@ -29,6 +29,36 @@ export default {
     },
     checkLength() {
       return this.cartList.filter(item => item.checked).length
+    },
+    isSelectAll() {
+      //数字也可以取反
+      //如果有checked为0，则返回false
+      // filter在全数组遍历，返回数组
+      // if (this.cartList.length)
+      // return !(this.cartList.filter(item => !item.checked).length)
+      // else return false
+      //  用find效率更高
+      // find找到一个就返回那个对象
+      if (this.cartList.length === 0) return false
+      return !(this.cartList.find(item => !item.checked))
+    }
+
+  },
+  methods: {
+    checkClick() {
+      if (this.isSelectAll) {  //全都选中情况下
+        this.cartList.forEach(item => item.checked = false)
+      }else {  //部分或全部不选中
+        this.cartList.forEach(item => item.checked = true)
+      }
+
+    //  代码简化  但是这里不行
+    //   this.cartList.forEach(item => item.checked = !this.isSelectAll)
+    },
+    calcClick() {
+      if (!this.isSelectAll) {
+        this.$toast.show('请选择购买商品')
+      }
     }
   }
 }
