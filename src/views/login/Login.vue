@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <nav-bar>
+    <nav-bar class="nav-bar">
       <div slot="left" class="back" @click="backClick"><span class="iconfont icon-arrowLeft"></span></div>
       <div slot="center">登录注册</div>
     </nav-bar>
@@ -26,8 +26,12 @@ export default {
 </script>
 
 <style scoped>
-.back span {
-  font-size: 30px;
-}
+  .back span {
+    font-size: 30px;
+  }
+
+  .nav-bar {
+    color: #000;
+  }
 
 </style>

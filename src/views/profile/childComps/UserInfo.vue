@@ -2,7 +2,7 @@
   <div id="user-info">
     <div class="user-icon">
       <span class="iconfont icon-profile_light"/>
-      <span></span>
+      <span class="text">当前为未登录状态</span>
       <span class="login right" @click="goToLogin">登录/注册</span>
     </div>
   </div>
@@ -26,15 +26,16 @@
     margin-top: -5px;
   }
 
-  .user-icon {
+  .user-icon .text{
+    vertical-align: middle;
   }
 
   .user-icon .iconfont {
+    vertical-align: middle;
     font-size: 50px;
   }
 
   .login {
-    margin-left: 30px;
     font-size: 18px ;
   }
 </style>
