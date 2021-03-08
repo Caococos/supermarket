@@ -66,10 +66,11 @@ export default {
 
 <style scoped>
   .bottom-bar {
-    position: relative;
-    height: 40px;
-    background-color: #eee;
+    position: fixed;
     display: flex;
+    height: 40px;
+    width: 100%;
+    background-color: #eee;
     font-size: 13px;
   }
 

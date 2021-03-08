@@ -13,6 +13,7 @@
 *,
 *::before,
 *::after {
+  user-select: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -65,3 +66,12 @@ a {
   float: right;
 }
 
+input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: normal;
+  border-radius: 0;
+  border: 0;
+  font-size: .16rem;
+  outline: none;
+}
