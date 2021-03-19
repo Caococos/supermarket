@@ -6,7 +6,7 @@ import toast from "@/components/common/toast"
 import FastClick from 'fastclick'
 import VueLazyLoad from "vue-lazyload";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false     //打包编译时是否显示进度
 
 //安装toast插件
 Vue.use(toast)
