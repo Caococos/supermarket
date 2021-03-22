@@ -15,7 +15,6 @@
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
     <detail-bottom-bar @addToCart="addToCart"/>
-    <toast :message="message" :show="show"/>
   </div>
 
 </template>
@@ -32,7 +31,6 @@ import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
 
 import Scroll from "@/components/common/scroll/Scroll";
 import GoodsList from "@/components/content/goods/GoodsList";
-import Toast from "@/components/common/toast/Toast";
 
 import {debounce} from "@/common/utils";
 import {mapActions} from "vuex"
@@ -54,7 +52,6 @@ export default {
     DetailCommentInfo,
     GoodsList,
     DetailBottomBar,
-    Toast
   },
   data() {
     return {

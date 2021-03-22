@@ -24,7 +24,7 @@ name: "Toast",
     }
   },
 methods: {
-  show(message='Toast', duration=1000) {
+  show(message='Toast', duration=2000) {
     // 以前给参数默认值的方式
     // duration = duration || 2000
     this.isShow = true
@@ -47,9 +47,25 @@ methods: {
     transform: translate(-50%, -50%);
     padding: 8px 10px;
     border-radius: 5px;
+    animation: toastA 2s linear;
     background-color: rgba(0,0,0,.7);
     color: #fff;
 
+  }
+
+  @keyframes toastA {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 
 </style>
